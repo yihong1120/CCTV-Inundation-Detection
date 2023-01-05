@@ -12,18 +12,12 @@ The following libraries are required to run this code:
 * gc
 * numpy
 * glob
-* pixel2mesh
-* mesh2depth
-* classify_rain
-* classify_inundation
-* voiture
-* mix_image
-* couleur_transparent
-* water
-* ground
-* database
-* crosswalk
-* zone_inondee
+* tensorflow
+* pillow
+* skimage
+* time
+* gc
+* ssl
 
 ## Functionality
 **min_in_file**
