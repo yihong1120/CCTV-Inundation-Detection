@@ -1,7 +1,7 @@
 # inundation_analysis_system
 This code is a collection of functions for analyzing and processing images. The functions perform a variety of tasks including taking photos from a CCTV camera, calculating the depth and area of inundation in an image, classifying whether an image contains rain or inundation, detecting vehicles in an image, mixing two images together, making a color transparent in an image, detecting water in an image, detecting the ground in an image, storing data in a database, and detecting crosswalks in an image.
 
-##Requirements
+## Requirements
 The following libraries are required to run this code:
 
 * os
@@ -25,7 +25,7 @@ The following libraries are required to run this code:
 * crosswalk
 * zone_inondee
 
-##Functionality
+## Functionality
 **min_in_file**
 This function takes a router as input and returns the minimum value in the file names of the files in the specified router. It does this by looping through the files in the router and extracting the numeric portion of the file name (assumed to be at the beginning of the file name before the first period). It then keeps track of the minimum value it has encountered and returns it at the end.
 
@@ -77,5 +77,5 @@ This function takes an image as input and returns whether the image contains a c
 **zone_inondee**
 This function takes an image as input and returns the inundated area in the image.
 
-Usage
+## Usage
 To use this code, run the main function and follow the prompts. You will be asked to enter a fichier name, choose whether to print timestamps on images, calculate the inundation region, store data in an Excel sheet or database, and specify the database or Excel sheet to use if applicable. Then, the appropriate functions will be called based on your input.
