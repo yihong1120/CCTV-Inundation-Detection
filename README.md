@@ -94,18 +94,23 @@ To use this code, run the main function and follow the prompts. You will be aske
 The inpaint of the images will be implemented first, the moving objects(car, bus, truck, motorcycle and person)
 
 ![inpaint the image]( 圖片網址 "圖片名稱")
+
 Then model shall detect the rain and generate the confidence score of the image, and print the consequence on the image.
 
 ![detection of the rain]( 圖片網址 "圖片名稱")
+
 If the rain occurs, the model will detect the inundation and generate the confidence score, and print the consequence on the image.
 
 ![detection of the inundation]( 圖片網址 "圖片名稱")
+
 If the inundation appears in the image, the model will estimate the inundation area and inundation depth.
 
 ![estimation the inundation area and inundation depth]( 圖片網址 "圖片名稱")
+
 If the users chose to insert the output into database, the model will automatically build the database and data sheet, or research the existing one. 
 
 ![store the computing result in the database]( 圖片網址 "圖片名稱")
+
 The computation shall be stored in your decided folder.
 
 ![GITHUB]( 圖片網址 "圖片名稱")
