@@ -93,21 +93,21 @@ To use this code, run the main function and follow the prompts. You will be aske
 
 The inpaint of the images will be implemented first, the moving objects(car, bus, truck, motorcycle and person)
 
-![inpaint the image](https://drive.google.com/file/d/1wEOKl-t0b4PYIrC4jGq2rJlrZb-PDJpN/view?usp=share_link)
+![inpaint the image](https://github.com/yihong1120/inundation_analysis_system/blob/main/packages/source/inpaint.gif)
 
 Then model shall detect the rain and generate the confidence score of the image, and print the consequence on the image.
 
-![detection of the rain](https://drive.google.com/file/d/1m2ez53P0qpS-O3SKaxqiw5rnlj0Qkd3i/view?usp=share_link)
+![detection of the rain](https://github.com/yihong1120/inundation_analysis_system/blob/main/packages/source/rain_score.gif)
 
 If the rain occurs, the model will detect the inundation and generate the confidence score, and print the consequence on the image.
 
-![detection of the inundation](https://drive.google.com/file/d/1wkCQ1h973z1g-3--GNAp5-fcfmSr4nL4/view?usp=share_link)
+![detection of the inundation](https://github.com/yihong1120/inundation_analysis_system/blob/main/packages/source/inundation_score.gif)
 
 If the inundation appears in the image, the model will estimate the inundation area and inundation depth.
 
-![estimate the area of the inundation](https://drive.google.com/file/d/1KTBoGqhVgWlT9ri_vUxvuYpgRyKeoS41/view?usp=share_link)
+![estimate the area of the inundation](https://github.com/yihong1120/inundation_analysis_system/blob/main/packages/source/inundation_area.gif)
 
-![estimation the inundation depth](https://drive.google.com/file/d/1i4BaguhOLsS3WVoER0tFxF-Kmwye3NYe/view?usp=share_link)
+![estimation the inundation depth](https://github.com/yihong1120/inundation_analysis_system/blob/main/packages/source/inundation_depth.gif)
 
 If the users can choose if they want to store the computation output in database.
 
