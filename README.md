@@ -77,6 +77,7 @@ This function takes an image as input and returns the inundated area in the imag
 
 ## Usage
 To install the essential packages
+
     cd inundation_analysis_system
     pip install -r requirements.txt
 
@@ -85,6 +86,7 @@ Download [model file]() and put them in the package folder.
 If you would like to keep the output data into database, install and open MySQL.
 
 You can download the [image dataset]() and extract it in the model folder, then execute "demo.py"
+
     python3 demo.py
 
 To use this code, run the main function and follow the prompts. You will be asked to enter a folder name, choose whether to print timestamps on images, calculate the inundation region, store and specify data in a database to use if applicable. Then, the appropriate functions will be called based on your input.
