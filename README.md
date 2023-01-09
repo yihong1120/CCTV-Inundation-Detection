@@ -1,5 +1,9 @@
 # inundation_analysis_system
-This code is a collection of functions for analyzing and processing images. The functions perform a variety of tasks including taking photos from a CCTV camera, calculating the depth and area of inundation in an image, classifying whether an image contains rain or inundation, detecting vehicles in an image, mixing two images together, making a color transparent in an image, detecting water in an image, detecting the ground in an image, storing data in a database, and detecting crosswalks in an image.
+Integrating Camera Images and Image Recognition for Regional Inundation Estimation [WONG, 2021].
+
+This is the official  implementation of [inundation_analysis_system](https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/login?o=dnclcdr&s=id=%22109NYCU5015050%22.&searchmode=basic) built with the open-source Mask-RCNN, EfficientNet, Pixel2Mesh, cv2 and etc.
+
+This code is a collection of functions for analyzing and processing images. The functions perform a variety of tasks including taking photos from a CCTV camera, classifying whether an image contains rain or inundation,  detecting and remove vehicles in an image, detecting water, roads and crosswalks in an image, calculating the depth and area of inundation in an image, storing data in a database.
 
 ## Requirements
 The following libraries are required to run this code:
@@ -72,4 +76,25 @@ This function takes an image as input and returns whether the image contains a c
 This function takes an image as input and returns the inundated area in the image.
 
 ## Usage
-To use this code, run the main function and follow the prompts. You will be asked to enter a fichier name, choose whether to print timestamps on images, calculate the inundation region, store data in an Excel sheet or database, and specify the database or Excel sheet to use if applicable. Then, the appropriate functions will be called based on your input.
+To install the essential packages
+    cd inundation_analysis_system
+    pip install -r requirements.txt
+
+Download [model file]() and put them in the package folder.
+
+If you would like to keep the output data into database, install and open MySQL.
+
+You can download the [image dataset]() and extract it in the model folder, then execute "demo.py"
+    python3 demo.py
+
+To use this code, run the main function and follow the prompts. You will be asked to enter a folder name, choose whether to print timestamps on images, calculate the inundation region, store and specify data in a database to use if applicable. Then, the appropriate functions will be called based on your input.
+
+The inpaint of the images will be implemented first, the moving objects(car, bus, truck, motorcycle and person)
+
+The model shall calculate the the confidence score of rain and inundation, and print the consequence on the image
+
+If the inundation appears in the image, the model will estimate the inundation area and inundation depth.
+
+If the users chose to insert the output into database, the model will automatically build the database and data sheet, or research the existing one. 
+
+The computation shall be stored in your decided folder.
