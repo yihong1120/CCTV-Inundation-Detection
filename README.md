@@ -111,4 +111,4 @@ If the inundation appears in the image, the model will estimate the inundation a
 
 If the users can choose if they want to store the computation output in database.
 
-![store the computing result in the database](https://drive.google.com/file/d/1PrDTzqArVDLRD3WnTMzBK5LGptjo4UmD/view?usp=share_link)
+![store the computing result in the database](https://github.com/yihong1120/inundation_analysis_system/blob/main/packages/source/MySQL.gif)
