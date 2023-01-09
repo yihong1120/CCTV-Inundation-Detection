@@ -103,9 +103,11 @@ If the rain occurs, the model will detect the inundation and generate the confid
 
 ![detection of the inundation](https://github.com/yihong1120/inundation_analysis_system/blob/main/packages/source/inundation_score.gif)
 
-If the inundation appears in the image, the model will estimate the inundation area and inundation depth.
+If the inundation appears in the image, the model will estimate the inundation area.
 
 ![estimate the area of the inundation](https://github.com/yihong1120/inundation_analysis_system/blob/main/packages/source/inundation_area.gif)
+
+The estimation of inundation depth.
 
 ![estimation the inundation depth](https://github.com/yihong1120/inundation_analysis_system/blob/main/packages/source/inundation_depth.gif)
 
