@@ -1,5 +1,5 @@
 # inundation_analysis_system
-Integrating Camera Images and Image Recognition for Regional Inundation Estimation [WONG, 2021].
+[Integrating Camera Images and Image Recognition for Regional Inundation Estimation (WONG, 2021)](https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/login?o=dnclcdr&s=id=%22109NYCU5015050%22.&searchmode=basic).
 
 This is the official  implementation of [inundation_analysis_system](https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/login?o=dnclcdr&s=id=%22109NYCU5015050%22.&searchmode=basic) built with the open-source Mask-RCNN, EfficientNet, Pixel2Mesh, cv2 and etc.
 
@@ -81,22 +81,25 @@ To install the essential packages
     cd inundation_analysis_system
     pip install -r requirements.txt
 
-Download [model file]() and put them in the package folder.
+Download [model file](https://drive.google.com/drive/folders/199ljdnja4-TvZ1NAO4QXsUJP2ZZuUAjw?usp=share_link) and put them in the package folder.
 
 If you would like to keep the output data into database, install and open MySQL.
 
-You can download the [image dataset]() and extract it in the model folder, then execute "demo.py"
+You can download the [image dataset](https://drive.google.com/file/d/1xIL2m0H6hwugPkGpMumq6OEgYrre-_0k/view?usp=share_link) and extract it in the model folder, then execute "demo.py"
 
     python3 demo.py
 
 To use this code, run the main function and follow the prompts. You will be asked to enter a folder name, choose whether to print timestamps on images, calculate the inundation region, store and specify data in a database to use if applicable. Then, the appropriate functions will be called based on your input.
 
 The inpaint of the images will be implemented first, the moving objects(car, bus, truck, motorcycle and person)
-
-The model shall calculate the the confidence score of rain and inundation, and print the consequence on the image
-
+![inpaint the image]( 圖片網址 "圖片名稱")
+Then model shall detect the rain and generate the confidence score of the image, and print the consequence on the image.
+![detection of the rain]( 圖片網址 "圖片名稱")
+If the rain occurs, the model will detect the inundation and generate the confidence score, and print the consequence on the image.
+![detection of the inundation]( 圖片網址 "圖片名稱")
 If the inundation appears in the image, the model will estimate the inundation area and inundation depth.
-
+![estimation the inundation area and inundation depth]( 圖片網址 "圖片名稱")
 If the users chose to insert the output into database, the model will automatically build the database and data sheet, or research the existing one. 
-
+![store the computing result in the database]( 圖片網址 "圖片名稱")
 The computation shall be stored in your decided folder.
+![GITHUB]( 圖片網址 "圖片名稱")
