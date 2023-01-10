@@ -1,4 +1,4 @@
-# inundation_analysis_system
+# CCTV-Inundation-Detection
 [Integrating Camera Images and Image Recognition for Regional Inundation Estimation (WONG, 2021)](https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/login?o=dnclcdr&s=id=%22109NYCU5015050%22.&searchmode=basic).
 
 This is the official  implementation of [inundation_analysis_system](https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/login?o=dnclcdr&s=id=%22109NYCU5015050%22.&searchmode=basic) built with the open-source Mask-RCNN, EfficientNet, Pixel2Mesh, cv2 and etc.
