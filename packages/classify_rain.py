@@ -19,9 +19,12 @@ def classify(img_path, output_route, date_de_la_photo, commener):
     img = np.array(img).astype(np.float32)
     img = np.expand_dims(img, 0)
 
-    result = np.squeeze(rain_model.predict(img))
+    out_percent = round(float(np.squeeze(rain_model.predict(img))[1]) * 100, 2)
 
-    out_percent = round(float(result[1]) * 100, 2)
+    if out_percent >= 50:
+        r, g, b = 255, 0, 0
+    else:
+        r, g, b = 0, 255, 0
 
     pic_height = 240
     pic_width = 320
@@ -31,24 +34,18 @@ def classify(img_path, output_route, date_de_la_photo, commener):
     height_mot = 20
     width_mot = 150
 
-    if out_percent >= 50:
-        r, g, b = 255, 0, 0
-    else:
-        r, g, b = 0, 255, 0
-
     if date_de_la_photo == "y":
-        positionner_pluie = positionner_pluie // 2
+        positionner_pluie //= 2
         height_rectangle = positionner_temps - height_mot
 
-        time_now = os.path.split(img_path)[1].split(".")[0]
-        time_now = TimestampsToTime(time_now)
+        time_now = TimestampsToTime(os.path.splitext(os.path.basename(img_path))[0])
 
         cv2.rectangle(img_cv2, (8, positionner_temps + 2), (8 + width_mot, positionner_temps - height_mot + 2), (255, 255, 255), -1)
         cv2.putText(img_cv2, time_now, (10, positionner_temps), cv2.FONT_HERSHEY_SIMPLEX, zoom_taille, (0, 0, 0), 2, cv2.LINE_AA)
 
     cv2.rectangle(img_cv2, (8, positionner_pluie + 2), (8 + width_mot, positionner_pluie - height_mot + 2), (255, 255, 255), -1)
-    cv2.putText(img_cv2, "rain: {}%".format(out_percent), (10, positionner_pluie), cv2.FONT_HERSHEY_SIMPLEX, zoom_taille, (r, g, b), 2, cv2.LINE_AA)
+    cv2.putText(img_cv2, f"rain: {out_percent:.2f}%", (10, positionner_pluie), cv2.FONT_HERSHEY_SIMPLEX, zoom_taille, (r, g, b), 2, cv2.LINE_AA)
 
     cv2.imwrite(output_route, img_cv2)
-    
+
     return out_percent
