@@ -2,51 +2,43 @@ import cv2
 import numpy as np
 
 # Import custom modules
-import inrange_blanc
-import img_adjust_tous_points
-import del_hort
-import draw_polygon
-import convex_hull
-import edge
-import del_vert
-import pixel_colour
+from utilities import inrange_blanc, img_adjust_tous_points, del_hort, draw_polygon, convex_hull, edge, del_vert, pixel_colour
 import shutil
 import imutils
 
 # List of supported image file extensions
-pic = ['jpg', 'png']
+SUPPORTED_IMAGE_EXTENSIONS = ['jpg', 'png']
 
-def delete_frame_lines(image):
+def remove_frame_edges(image_path):
     """
-    Deletes the lines on the edges of an image by setting the pixel values to black (0, 0, 0).
+    Removes the frame edges of an image by setting the pixel values to black (0, 0, 0).
     """
-    image = cv2.imread(image)
+    image = cv2.imread(image_path)
     height, width = image.shape[:2]  # Get image dimensions
 
-    # Iterate over all pixels in the image
-    for i in range(width):
-        for j in range(height):
-            # Set the pixel values to black if the pixel is located on the edges of the image
-            if i == 0 or i == width - 1 or j == 0 or j == height - 1:
-                image[i, j] = (0, 0, 0)
+    # Set the pixel values to black on the edges of the image
+    image[0, :] = (0, 0, 0)
+    image[height-1, :] = (0, 0, 0)
+    image[:, 0] = (0, 0, 0)
+    image[:, width-1] = (0, 0, 0)
 
     # Save the modified image
-    cv2.imwrite(image, image)
+    cv2.imwrite(image_path, image)
 
-def fill_edge(im_in, input_type='image'):
+def fill_edges_with_white(image_input, input_type='image'):
     """
-    Fills the exterior of an image with white pixels.
+    Fills the edges of an image with white pixels.
     """
     # Read image if input is an image file path
     if input_type == 'image':
-        im_in = cv2.imread(im_in)
+        image_input = cv2.imread(image_input)
 
     # Copy image for flood fill operation
-    im_floodfill = im_in.copy()
+    im_floodfill = image_input.copy()
 
     # Create mask for flood fill operation
     # The size of the mask should be 2 pixels larger than the image on each side
-    height, width = im_in.shape[:2]
+    height, width = image_input.shape[:2]
     mask = np.zeros((height + 2, width + 2), np.uint8)
 
     # Flood fill from point (0, 0)
@@ -62,24 +54,18 @@ def fill_edge(im_in, input_type='image'):
     # Save the inverted flood filled image if input is an image file path
     cv2.imwrite('./testest.png', im_floodfill_inv)
 
-def white_area_size(image):
+def calculate_white_area(image):
     """
-    Counts the number of white pixels in an image.
+    Calculates the number of white pixels in an image using vectorization.
     """
-    white_pixel_count = 0
-
-    # Iterate over all pixels in the image
-    for i in range(image.shape[0]):
-        for j in range(image.shape[1]):
-            # Increment white_pixel_count if the pixel value is greater than 0
-            if image[i, j].all() > 0:
-                white_pixel_count += 1
+    # Use numpy to count non-zero pixels which are white
+    white_pixel_count = np.sum(np.all(image == 255, axis=2))
 
     return white_pixel_count
 
-def max_min_area_rect(image, input_type='image'):
+def find_max_min_area_rectangle(image, input_type='image'):
     """
-    Returns the maximum area and dimensions of the minimum bounding rectangle of all the contours in an image.
+    Finds the maximum area and dimensions of the minimum bounding rectangle of all the contours in an image.
     """
     # Read image if input is an image file path
     if input_type == 'image':
@@ -109,7 +95,7 @@ def max_min_area_rect(image, input_type='image'):
 
     return max_area, max_length, max_width
 
-def sort_contours(contours):
+def sort_contours_by_position(contours):
     """
     Sorts a list of contours by the x coordinate of the top-left corner of the minimum bounding rectangle of each contour.
     """
@@ -117,7 +103,7 @@ def sort_contours(contours):
     contours.sort(key=lambda ctr: cv2.boundingRect(ctr)[0])
     return contours
 
-def count_lines(image, input_type='image'):
+def get_line_count(image, input_type='image'):
     """
     Returns the number of lines in an image.
     """
@@ -136,18 +122,22 @@ def count_lines(image, input_type='image'):
     lines = cv2.HoughLinesP(edges, 1, np.pi/180, 100, minLineLength=100, maxLineGap=10)
 
     # Return the number of lines in the image
-    return len(lines)
+    return len(lines) if lines is not None else 0
 
-def line_distance(image, input_type='image'):
+def calculate_average_line_distance(image, input_type='image'):
     """
-    Returns the average distance between lines in an image.
+    Calculates the average distance between lines in an image.
     """
     # Read image if input is an image file path
     if input_type == 'image':
         image = cv2.imread(image)
 
     # Get the number of lines in the image
-    num_lines = count_lines(image, input_type='array')
+    num_lines = get_line_count(image, input_type='array')
+
+    # Avoid division by zero if there are no lines
+    if num_lines == 0:
+        return None
 
     # Get the height of the image
     height = image.shape[0]
@@ -156,4 +146,3 @@ def line_distance(image, input_type='image'):
     average_distance = height / num_lines
 
     return average_distance
-
