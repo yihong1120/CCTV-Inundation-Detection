@@ -1,19 +1,14 @@
-from tensorflow.compat.v1 import reset_default_graph,get_default_graph,disable_eager_execution
-#import tensorflow as tf
 import os
-import json
-import glob
 import numpy as np
 import time
 from PIL import Image
 from PIL import ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
-import gc
-import cv2
+import 
+import 
 import sys
 sys.path.append('./')
 from model_cnn import efficientnet_b3 as create_model
-disable_eager_execution()
 
 # create graph
 global inundation_graph
@@ -39,7 +34,7 @@ def classify(img_path,output_route,date_de_la_photo):
     
     # load image
     img = Image.open(img_path).convert('RGB')
-    img_cv2 = cv2.cvtColor(np.asarray(img),cv2.COLOR_RGB2BGR)
+    img_opencv-python = opencv-python.cvtColor(np.asarray(img),opencv-python.COLOR_RGB2BGR)
     # resize image
     img = img.resize((im_width, im_height))
     # read image
@@ -47,7 +42,7 @@ def classify(img_path,output_route,date_de_la_photo):
     # Add the image to a batch where it's the only member.
     img = (np.expand_dims(img, 0))
 
-    reset_default_graph()
+    
     with inundation_graph.as_default():
         result = np.squeeze(inundation_model.predict(img))
 
@@ -82,8 +77,8 @@ def classify(img_path,output_route,date_de_la_photo):
         
     #mettre les mots
     if date_de_la_photo=="y":
-        cv2.rectangle(img_cv2, (8, positionner_inondation+2), (8+width_mot, positionner_inondation-height_mot+2 ), (255, 255, 255), -1)
-        cv2.putText(img_cv2, print_res, (10, positionner_inondation),  cv2.FONT_HERSHEY_SIMPLEX,
+        cv2.rectangle(img_opencv-python, (8, positionner_inondation+2), (8+width_mot, positionner_inondation-height_mot+2 ), (255, 255, 255), -1)
+        cv2.putText(img_cv2, print_res, (10, positionner_inondation),  cv2.FONT_HERSHEY_SIMPLEX
             zoom_taille, (b, g, r), 2)
     else:
         positionner_inondation==positionner_inondation*2//3
@@ -93,10 +88,10 @@ def classify(img_path,output_route,date_de_la_photo):
             
     cv2.imwrite(output_route, img_cv2)
 
-    del img, img_cv2
-    get_default_graph().finalize()
+    
+    
     return out_percent
-    gc.collect()
+    
 
 if __name__ == '__main__':
     start=time.time()
@@ -106,5 +101,5 @@ if __name__ == '__main__':
     classify(img_path,output_route,date_de_la_photo)
     end=time.time()
     run_time=end-start
-    print(run_time)
-    print(round(run_time),2)
+    
+    print(round(run_time, 2))
