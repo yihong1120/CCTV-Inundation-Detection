@@ -34,6 +34,13 @@ COCO_MODEL_URL = "https://github.com/matterport/Mask_RCNN/releases/download/v2.0
 
 def extract_bboxes(mask):
     """Compute bounding boxes from masks.
+
+    Args:
+        mask: 3D numpy array of shape [height, width, num_instances]. Mask pixels are either 1 or 0.
+
+    Returns:
+        2D numpy array of shape [num_instances, (y1, x1, y2, x2)] containing bounding box coordinates for each instance."""
+    """Compute bounding boxes from masks.
     mask: [height, width, num_instances]. Mask pixels are either 1 or 0.
 
     Returns: bbox array [num_instances, (y1, x1, y2, x2)].
@@ -59,6 +66,16 @@ def extract_bboxes(mask):
 
 
 def compute_iou(box, boxes, box_area, boxes_area):
+    """Calculates IoU of the given box with the array of the given boxes.
+
+    Args:
+        box: 1D vector [y1, x1, y2, x2]
+        boxes: 2D numpy array of shape [boxes_count, (y1, x1, y2, x2)]
+        box_area: float, the area of 'box'
+        boxes_area: 1D numpy array with length boxes_count, the areas of 'boxes'
+
+    Returns:
+        Float numpy array of length boxes_count, containing the IoU value for each box in the array."""
     """Calculates IoU of the given box with the array of the given boxes.
     box: 1D vector [y1, x1, y2, x2]
     boxes: [boxes_count, (y1, x1, y2, x2)]
