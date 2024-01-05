@@ -1,5 +1,7 @@
-import time # 引入time
-import os
+from time import time
+from os import os
+""" This module provides functions for converting timestamps to and from human-readable time formats. """
+
 '''
 timeString = "2020-08-10_15h30" # 時間格式為字串
 struct_time = time.strptime(timeString, "%Y-%m-%d_%Hh%M") # 轉成時間元組
@@ -15,12 +17,14 @@ def JPGtoPNG():
         print(file[:-4]+"->"+str(time_stamp))
     return
     
+""" Converts a time string to a timestamp. """
 def TimeToTimestamps(Time):
     struct_time = time.strptime(Time, "%Y-%m-%d_%Hh%M") # 轉成時間元組
     time_stamp = int(time.mktime(struct_time)) # 轉成時間戳
     #print(time_stamp)
     return time_stamp
     
+""" Converts a timestamp to a time string. """
 def TimestampsToTime(Timestamp):
     t = time.localtime(int(Timestamp))
     timeStr = time.strftime("%Y-%m-%d_%Hh%M", t)
