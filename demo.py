@@ -7,7 +7,7 @@ import cv2
 import gc
 import glob
 
-sys.path.append(os.path.join(os.getcwd(),"Mask_RCNN"))
+sys.path.append(os.path.join(os.getcwd(),"packages"))
 import pixel2mesh
 import mesh2depth
 import classify_rain
