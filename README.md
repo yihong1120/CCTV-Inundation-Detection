@@ -21,7 +21,10 @@ The following libraries are required to run this code:
 * keras
 * pillow # Used for image manipulation
 * skimage # Used for image processing
-* numpy # Used for numerical operations
+* ```python
+# Unit Tests
+
+```
 * keras # Used for machine learning models
 * gc # Used for garbage collection
 * ssl # Used for Secure Sockets Layer support
@@ -78,7 +81,10 @@ This function takes an image as input and returns the number of vehicles detecte
 **mix_image:**
 This function takes two images as input and combines them into a single image.
 
-**couleur_transparent:**
+```python
+# Instructions on how to run unit tests for each library dependency
+
+```
 This function takes an image and a color as input and makes the specified color transparent in the image.
 
 **water:**
@@ -93,7 +99,10 @@ This function stores data in a database.
 **crosswalk:**
 This function takes an image as input and returns whether the image contains a crosswalk or not.
 
-**zone_inondee:**
+```python
+# Mention any additional setup required for running the unit tests
+
+```
 This function takes an image as input and returns the inundated area in the image.
 
 ## Usage
