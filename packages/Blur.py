@@ -2,8 +2,7 @@
 # coding: utf-8
 
 # In[12]:
-import numpy
-#import argparse
+import cv2
 import cv2
 def blur(br1,br2,blurry,Input,Output):
     image = cv2.imread(Input)
