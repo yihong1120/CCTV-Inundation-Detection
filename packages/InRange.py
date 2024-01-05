@@ -8,7 +8,17 @@ import cv2
 def InRange(hp,sp,vp,ha,sa,va,INPUT):
     img = cv2.imread(INPUT)#overlay
 
-    # OpenCV的顏色預設是BGR格式，這邊將其轉換為HSV格式
+    # This function extracts a specific color range from the input image.
+# Args:
+#     hp (int): Minimum hue value.
+#     sp (int): Minimum saturation value.
+#     vp (int): Minimum value (brightness) value.
+#     ha (int): Maximum hue value.
+#     sa (int): Maximum saturation value.
+#     va (int): Maximum value (brightness) value.
+#     INPUT (str): Input image file path.
+# Returns:
+#     None的顏色預設是BGR格式，這邊將其轉換為HSV格式
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     # 以HSV格式決定要提取的顏色範圍，顏色格式的說明請參考後續內容
