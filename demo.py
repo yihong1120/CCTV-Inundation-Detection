@@ -7,9 +7,10 @@ import cv2
 import gc
 import glob
 
-sys.path.append(os.path.join(os.getcwd(),"packages"))
-import pixel2mesh
-import mesh2depth
+sys.path.append(os.path.join(os.getcwd(),"src"))
+from image_processing import min_in_file, max_in_file, min_fichier, max_fichier, prendre_des_photos_CCTV
+from model_inference import inundation_depth
+from database_operations import create_database, store_data
 import classify_rain
 import classify_inundation
 import voiture
@@ -17,83 +18,10 @@ import mix_image
 import couleur_transparent
 import water
 import ground
-import database
 import crosswalk
 import zone_inondee
 
 pic=['jpg','png']
-def min_in_file(router):
-    """Returns the minimum number in a file name in a given directory.
-    Assumes file names are integers preceded by a period, like '123.png'.
-    
-    Parameters:
-        router (str): The directory to search for file names in.
-    """
-    minium=None
-    for file in glob.iglob(os.path.join(os.getcwd(),router,'*.png')):
-        file=os.path.split(file)[1]
-        if file.split(".")[0].isdigit():
-            file=int(file.split(".")[0])
-            if minium==None:
-                minium=file
-            elif minium>file:
-                minium=file
-    return minium
-    
-def max_in_file(router):
-    """Returns the maximum number in a file name in a given directory.
-    Assumes file names are integers preceded by a period, like '123.png'.
-    
-    Parameters:
-        router (str): The directory to search for file names in.
-    """
-    maxium=None
-    for file in glob.iglob(os.path.join(os.getcwd(),router,'*.png')):
-        file=os.path.split(file)[1]
-        if file.split(".")[0].isdigit():
-            file=int(file.split(".")[0])
-            if maxium==None:
-                maxium=file
-            elif maxium<file:
-                maxium=file
-    return maxium
-
-def min_fichier(fichief_nom):
-    """Returns the file path of the file with the minimum number in its name.
-    Assumes file names are integers preceded by a period, like '123.png'.
-    
-    Parameters:
-        fichief_nom (str): The directory containing the file.
-    """
-    return os.path.join(os.getcwd(),fichief_nom,str(min_in_file(fichief_nom))+".png")
-    
-def max_fichier(fichief_nom):
-    """Returns the file path of the file with the maximum number in its name.
-    Assumes file names are integers preceded by a period, like '123.png'.
-    
-    Parameters:
-        fichief_nom (str): The directory containing the file.
-    """
-    return os.path.join(os.getcwd(),fichief_nom,str(max_in_file(fichief_nom))+".png")
-
-def prendre_des_photos_CCTV():
-    """Moves the file with the minimum number in its name from a given directory to another directory.
-    Assumes file names are integers preceded by a period, like '123.png'.
-    
-    Parameters:
-        router (str): The directory to search for file names in.
-    """
-    min=str(min_in_file(commener))
-    shutil.move(os.path.join(os.getcwd(),commener,min+".png"), os.path.join(os.getcwd(),"timestamps",min+".png"))
-    del min
-    gc.collect()
-
-def inundation_depth(mesh2obj_dec,front_view=None,ratio_height=None):
-    """Calculates the depth of inundation.
-    
-    Parameters:
-        mesh2obj_dec (int): Determines whether to calculate the front view and ratio of height or the depth of inundation.
-            0: Calculate front view and ratio of height.
             1: Calculate depth of inundation.
         front_view (numpy array, optional): The front view of the object. Required if mesh2obj_dec is 1.
         ratio_height (float, optional): The ratio of height of the object. Required if mesh2obj_dec is 1.
