@@ -1,27 +1,27 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[12]:
-import numpy as np
-from PIL import Image
 import cv2
-def InRange(hp,sp,vp,ha,sa,va,INPUT):
-    img = cv2.imread(INPUT)#overlay
+import numpy as np
 
-    # OpenCV的顏色預設是BGR格式，這邊將其轉換為HSV格式
+def apply_color_range(hp, sp, vp, ha, sa, va, input_path):
+    """Applies a color range to an image using OpenCV.
+
+    Args:
+        hp, sp, vp (int): Lower bound for the HSV color space.
+        ha, sa, va (int): Upper bound for the HSV color space.
+        input_path (str): Path to the input image.
+    """
+    img = cv2.imread(input_path)
+
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-    # 以HSV格式決定要提取的顏色範圍，顏色格式的說明請參考後續內容
-    lower = np.array([hp,sp,vp]) #0,0,0
-    upper = np.array([ha,sa,va]) #0,0,26
-    # 將HSV影像的閾值設定為想要提取的顏色
+    lower = np.array([hp, sp, vp])
+    upper = np.array([ha, sa, va])
+
     mask = cv2.inRange(hsv, lower, upper)
-    # 使用bitwise_and()合併掩膜(mask)和原來的影像
-    #img_specific = cv2.bitwise_and(img,img, mask= mask)
-    #result = cv2.bitwise_and(image, image, mask)
-    # 展示原圖、掩膜、抽取顏色後的影像
-    cv2.imwrite(INPUT, mask)
-    #os.remove(base_path_overlay+str(min_in_file(base_path_overlay))+".png")
+
+    cv2.imwrite(input_path, mask)
     '''
     # 输入文件
     img = Image.open(INPUT)
@@ -51,6 +51,6 @@ def InRange(hp,sp,vp,ha,sa,va,INPUT):
     cv2.imwrite(INPUT, dst)
     #os.remove(base_path_couleurs_bleu+str(min_in_file(base_path_couleurs_bleu))+".png")
     return
-if __name__=="__main__":
-    input="./05_test.png"
-    InRange(0,43,46,10,255,255,input)
+if __name__ == "__main__":
+    input_path = "./05_test.png"
+    apply_color_range(0, 43, 46, 10, 255, 255, input_path)
