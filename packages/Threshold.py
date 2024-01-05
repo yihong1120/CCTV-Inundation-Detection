@@ -5,7 +5,7 @@
 import cv2
 def threshold(threshold,grayscale_degree,input,output):
     img = cv2.imread(input)
-    ret,threshold = cv2.threshold(img,threshold,grayscale_degree,cv2.THRESH_BINARY)
+    ret,thresholded_image = cv2.threshold(img,threshold,grayscale_degree,cv2.THRESH_BINARY)
     cv2.imwrite(output, threshold)
     return
 '''
