@@ -13,10 +13,16 @@ The following libraries are required to run this code:
 * sys
 * shutil
 * cv2
+* mrcnn
+* efficientnet
+* pixel2mesh
+* efficientnet
+* pixel2mesh
+* keras
 * pillow # Used for image manipulation
 * skimage # Used for image processing
 * numpy # Used for numerical operations
-* tensorflow # Used for machine learning models
+* keras # Used for machine learning models
 * gc # Used for garbage collection
 * ssl # Used for Secure Sockets Layer support
 * shutil # Used for high-level file operations
