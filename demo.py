@@ -1,4 +1,4 @@
-# imports
+# """"""Imports necessary packages for image processing, flood monitoring, and management."""\nimport os\nimport time\nimport sys\nimport gc\nimport shutil\nimport cv2\nimport glob\n\nsys.path.append(os.path.join(os.getcwd(),"packages"))\nimport pixel2mesh\nimport mesh2depth\nimport classify_rain\nimport classify_inundation\nimport voiture\nimport mix_image\nimport couleur_transparent\nimport water\nimport ground\nimport database\nimport crosswalk\nimport zone_inondee\npic=['jpg','png']"""\nimport os\nimport time\nimport sys\nimport shutil\nimport cv2\nimport gc\nimport glob\n\nsys.path.append(os.path.join(os.getcwd(),"packages"))\nimport pixel2mesh\nimport mesh2depth\nimport classify_rain\nimport classify_inundation\nimport voiture\nimport mix_image\nimport couleur_transparent\nimport water\nimport ground\nimport database\nimport crosswalk\nimport zone_inondee\n\npic=['jpg','png']
 import os
 import time
 import sys
@@ -23,6 +23,18 @@ import zone_inondee
 
 pic=['jpg','png']
 def min_in_file(router):
+    """Returns the minimum number in a file name in a given directory.
+    Assumes file names are integers preceded by a period, like '123.png'.
+    
+    Parameters:
+        router (str): The directory to search for file names in.
+    """
+    """Returns the minimum number in a file name in a given directory.
+    Assumes file names are integers preceded by a period, like '123.png'.
+    
+    Parameters:
+        router (str): The directory to search for file names in.
+    """
     """Returns the minimum number in a file name in a given directory.
     Assumes file names are integers preceded by a period, like '123.png'.
     
@@ -178,7 +190,7 @@ if __name__ == "__main__":
         if database_name!=None:
             database.store_data(database_name,time_start,rain_class,inundation_class,car_detection,water_detection,ground_detection,crosswalk_detection,inundated_region,inundation_depth_val)
 
-        # print time on images if necessary
+        """Prints time on images if necessary."""
         if date_de_la_photo==ans[0]:
             img=cv2.imread(min_fichier(commener))
             font=cv2.FONT_HERSHEY_SIMPLEX
@@ -191,5 +203,5 @@ if __name__ == "__main__":
             del img
             gc.collect()
 
-        # wait for next iteration
+        """Wait for the next iteration."""
         time.sleep(60-(time.time()-time_start))
