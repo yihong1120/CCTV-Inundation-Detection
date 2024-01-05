@@ -3,7 +3,7 @@ import numpy as np
 from PIL import Image
 import cv2
 
-from model_cnn import efficientnet_b3 as create_model
+from model_cnn import efficientnet_b4 as create_model
 
 model_weights_path = './Mask_RCNN/inundation_b3/efficientnet.ckpt'
 

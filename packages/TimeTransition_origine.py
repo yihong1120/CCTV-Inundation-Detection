@@ -1,4 +1,6 @@
-import time 
+""" This module provides functions for time and timestamp conversion."""
+import time # Import the time module for time-related functionalities
+ # Import the os module for interacting with the operating system
 import os
 '''
 timeString = "2020-08-10_15h30" # 時間格式為字串
@@ -22,6 +24,7 @@ def TimeToTimestamps(Time):
     return time_stamp
     
 def TimestampsToTime(Timestamp):
+    """ Converts a timestamp to a time string."""
     t = time.localtime(int(Timestamp))
     timeStr = time.strftime("%Y-%m-%d_%Hh%M", t)
     return timeStr
