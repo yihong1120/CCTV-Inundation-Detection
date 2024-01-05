@@ -11,7 +11,7 @@ import sys
 import os
 import logging
 import math
-from .utils_common import compute_recall
+
 import random
 import numpy as np
 import tensorflow as tf
