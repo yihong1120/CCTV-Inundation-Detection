@@ -397,26 +397,51 @@ def resize_image(image, min_dim=None, max_dim=None, min_scale=None, mode="square
         this percent even if min_dim doesn't require it.
     mode: Resizing mode.
         none: No resizing. Return the image unchanged.
-        square: Resize and pad with zeros to get a square image
-            of size [max_dim, max_dim].
-        pad64: Pads width and height with zeros to make them multiples of 64.
-               If min_dim or min_scale are provided, it scales the image up
-               before padding. max_dim is ignored in this mode.
-               The multiple of 64 is needed to ensure smooth scaling of feature
-               maps up and down the 6 levels of the FPN pyramid (2**6=64).
-        crop: Picks random crops from the image. First, scales the image based
-              on min_dim and min_scale, then picks a random crop of
-              size min_dim x min_dim. Can be used in training only.
-              max_dim is not used in this mode.
+    # Define the resizing modes
+    modes = {
+        "square": "Resize and pad with zeros to get a square image of size [max_dim, max_dim].",
+        "pad64": "Pads width and height with zeros to make them multiples of 64. If min_dim or min_scale are provided, it scales the image up before padding. max_dim is ignored in this mode. The multiple of 64 is needed to ensure smooth scaling of feature maps up and down the 6 levels of the FPN pyramid (2**6=64).",
+        "crop": "Picks random crops from the image. First, scales the image based on min_dim and min_scale, then picks a random crop of size min_dim x min_dim. Can be used in training only. max_dim is not used in this mode."
+    }
 
-    Returns:
-    image: the resized image
-    window: (y1, x1, y2, x2). If max_dim is provided, padding might
-        be inserted in the returned image. If so, this window is the
-        coordinates of the image part of the full image (excluding
-        the padding). The x2, y2 pixels are not included.
-    scale: The scale factor used to resize the image
-    padding: Padding added to the image [(top, bottom), (left, right), (0, 0)]
+    # Check if the mode is valid
+    if mode not in modes:
+        raise ValueError(f"Invalid mode '{mode}', available modes are {list(modes.keys())}")
+
+    # Keep track of image dtype and return results in the same dtype
+    image_dtype = image.dtype
+    # Default window (y1, x1, y2, x2) and default scale == 1.
+    h, w = image.shape[:2]
+    window = (0, 0, h, w)
+    scale = 1
+    padding = [(0, 0), (0, 0), (0, 0)]
+    crop = None
+
+    # Scale the image if necessary
+    if min_dim:
+        scale = max(1, min_dim / min(h, w))
+    if min_scale and scale < min_scale:
+        scale = min_scale
+
+    # Check if the image exceeds the maximum dimension
+    if max_dim and mode == "square":
+        image_max = max(h, w)
+        if round(image_max * scale) > max_dim:
+            scale = max_dim / image_max
+
+    # Resize the image using bilinear interpolation
+    if scale != 1:
+        image = resize(image, (round(h * scale), round(w * scale)), preserve_range=True)
+
+    # Apply the appropriate resizing mode
+    if mode == "square":
+        image, window = square_resize(image, max_dim)
+    elif mode == "pad64":
+        image, window = pad64_resize(image, min_dim)
+    elif mode == "crop":
+        image, window = crop_resize(image, min_dim)
+
+    return image.astype(image_dtype), window, scale, padding, crop
     """
     # Keep track of image dtype and return results in the same dtype
     image_dtype = image.dtype
