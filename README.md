@@ -3,7 +3,7 @@
 
 This is the official  implementation of [inundation_analysis_system](https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/login?o=dnclcdr&s=id=%22109NYCU5015050%22.&searchmode=basic) built with the open-source Mask-RCNN, EfficientNet, Pixel2Mesh, cv2 and etc.
 
-This code is a collection of functions for analyzing and processing images. The functions perform a variety of tasks including taking photos from a CCTV camera, classifying whether an image contains rain or inundation,  detecting and remove vehicles in an image, detecting water, roads and crosswalks in an image, calculating the depth and area of inundation in an image, storing data in a database.
+This code is a collection of functions for analyzing and processing images. The functions perform a variety of tasks including taking photos from a CCTV camera, classifying whether an image contains rain or inundation,  detecting and remove vehicles in an image, detecting water, roads and crosswalks in an image, calculating the depth and area of inundation in an image, storing data in a database. Some common functions have been moved to `utils_common.py` and `utils.py` and `utils_org.py` now import from this file.
 
 ## Requirements
 The following libraries are required to run this code:
@@ -14,6 +14,14 @@ The following libraries are required to run this code:
 * shutil
 * cv2
 * gc
+* numpy
+* glob
+* tensorflow
+* pillow
+* skimage
+* time
+* gc
+* ssl
 * numpy
 * glob
 * tensorflow
